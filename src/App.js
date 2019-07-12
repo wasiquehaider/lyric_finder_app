@@ -19,56 +19,23 @@ class App extends Component {
       newArray: []
     };
   }
-  handleAllChecked = event => {
-    let fruits = this.state.fruits;
-    fruits.forEach(fruite => (fruite.isChecked = event.target.checked));
-    this.setState({ fruits: fruits });
-  };
-  handleCheckChieldElement = event => {
-    let fruits = this.state.fruits;
-    fruits.forEach(fruite => {
-      if (fruite.value === event.target.value)
-        fruite.isChecked = event.target.checked;
-    });
-    this.setState({ fruits: fruits });
-  };
   render() {
     const { fruits } = this.state;
 
     return (
-      <div className="App">
-        <h1> Check and Uncheck All Example </h1>
-        {console.log(fruits)}
-        <input
-          type="checkbox"
-          onClick={this.handleAllChecked}
-          value="checkedall"
-        />{" "}
-        Check / Uncheck All
-        <ul>
-          {this.state.fruits.map(fruite => {
-            return (
-              <CheckBox
-                handleCheckChieldElement={this.handleCheckChieldElement}
-                {...fruite}
-              />
-            );
-          })}
-        </ul>
-      </div>
-      // <Provider>
-      //   <Router>
-      //     <React.Fragment>
-      //       <Navbar />
-      //       <div className="container">
-      //         <Switch>
-      //           <Route exact path="/" component={Index} />
-      //           <Route path="/lyrics/track/:id" component={Lyrics} />
-      //         </Switch>
-      //       </div>
-      //     </React.Fragment>
-      //   </Router>
-      // </Provider>
+      <Provider>
+        <Router>
+          <React.Fragment>
+            <Navbar />
+            <div className="container">
+              <Switch>
+                <Route exact path="/" component={Index} />
+                <Route path="/lyrics/track/:id" component={Lyrics} />
+              </Switch>
+            </div>
+          </React.Fragment>
+        </Router>
+      </Provider>
     );
   }
 }
@@ -76,18 +43,3 @@ class App extends Component {
 export default App;
 
 // Lyrics Search App Using React Context API and Musixmatch API
-
-export const CheckBox = props => {
-  return (
-    <li>
-      <input
-        key={props.id}
-        onClick={props.handleCheckChieldElement}
-        type="checkbox"
-        checked={props.isChecked}
-        value={props.value}
-      />{" "}
-      {props.value}
-    </li>
-  );
-};
